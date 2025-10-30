@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}{{ item.name }} - Exchange Items{% endblock %}
+{% block content %}
+	<div class="row">
+		<div class="col-12 col-lg-6">
+			{% if item.image_filename %}
+				<img src="{{ url_for('uploaded_file', filename=item.image_filename) }}" class="img-fluid rounded mb-3" alt="{{ item.name }}" />
+			{% endif %}
+		</div>
+		<div class="col-12 col-lg-6">
+			<h1 class="h4">{{ item.name }}</h1>
+			<p class="text-muted">{{ item.category }} • {{ item.location }}</p>
+			<p>{{ item.description }}</p>
+			<p><strong>Wants:</strong> {{ item.expected_item }}</p>
+			<p class="text-muted">Listed by {{ item.owner.username }} on {{ item.created_at.strftime('%Y-%m-%d') }}</p>
+			<div class="d-flex gap-2">
+				{% if user and user.id != item.owner_id %}
+					<form method="post" action="{{ url_for('toggle_favourite', item_id=item.id) }}">
+						<button type="submit" class="btn btn-outline-primary">{% if is_favourited %}❤ Unfavourite{% else %}❤ Favourite{% endif %}</button>
+					</form>
+				{% endif %}
+				<a class="btn btn-secondary" href="{{ url_for('index') }}">Back</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Add Item - Exchange Items{% endblock %}
+{% block content %}
+	<div class="row justify-content-center">
+		<div class="col-12 col-lg-8">
+			<h1 class="h4 mb-3">List an Item for Exchange</h1>
+			<form method="post" enctype="multipart/form-data" action="{{ url_for('create_item') }}">
+				<div class="mb-3">
+					<label class="form-label">Item Name</label>
+					<input type="text" name="name" class="form-control" required />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Description</label>
+					<textarea name="description" class="form-control" rows="4" required></textarea>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Expected Item</label>
+					<input type="text" name="expected_item" class="form-control" required />
+				</div>
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<label class="form-label">Category</label>
+						<input type="text" name="category" class="form-control" placeholder="e.g., Electronics, Books" required />
+					</div>
+					<div class="col-md-6 mb-3">
+						<label class="form-label">Location</label>
+						<input type="text" name="location" class="form-control" placeholder="City / Area" required />
+					</div>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Image</label>
+					<input type="file" name="image" accept="image/*" class="form-control" />
+				</div>
+				<button class="btn btn-primary" type="submit">Add to List</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}
+
